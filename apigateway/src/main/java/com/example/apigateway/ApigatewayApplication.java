@@ -12,7 +12,9 @@ import com.example.apigateway.model.Demo;
 @SpringBootApplication
 public class ApigatewayApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		Thread.sleep(5000);
+
 		SpringApplication.run(ApigatewayApplication.class, args);
 	}
 

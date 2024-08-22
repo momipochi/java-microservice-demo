@@ -3,6 +3,11 @@ spring:
       name: eurekaserver
 
 eureka:
+   instance:
+      enabled: true
+      statusPageUrl: https://${eureka.hostname}/info
+      healthCheckUrl: https://${eureka.hostname}/health
+      homePageUrl: https://${eureka.hostname}/
    client:
       registerWithEureka: false
       fetchRegistry: false

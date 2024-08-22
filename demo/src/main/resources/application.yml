@@ -1,11 +1,11 @@
 spring:
   application:
-    name: DemoMicroservice
+    name: DemoMicroservice  # This should match the URI used in the gateway
 server:
   port : 8081
 eureka:
     client:
         service-url:
-            defaultZone: http://eurekaserver:8761/eureka
+            defaultZone: http://eureka:8761/eureka  # Updated service name
         fetch-registry: true
         register-with-eureka: true

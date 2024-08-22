@@ -7,12 +7,12 @@ spring:
     gateway:
       routes:
         - id: demo
-          uri: lb://DEMO
+          uri: lb://DemoMicroservice  # Matches the name in demo's application.yml
           predicates:
             - Path=/hello/**
 eureka:
     client:
         service-url:
-            defaultZone: http://eurekaserver:8761/eureka
+            defaultZone: http://eureka:8761/eureka  # Updated service name
         fetch-registry: true
         register-with-eureka: true

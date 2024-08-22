@@ -5,6 +5,9 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean test package
 
+RUN apt-get update
+RUN apt-get install -y curl 
+
 # Use a minimal Java runtime image to run the application
 FROM eclipse-temurin:21-jre-alpine
 
