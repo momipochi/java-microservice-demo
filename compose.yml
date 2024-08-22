@@ -1,0 +1,46 @@
+services:
+  eureka:
+    image: java-microservice-eurekaserver
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    build:
+      context: ./eurekaserver
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - eureka-network
+  apigateway:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    image: java-microservice-apigateway
+    build:
+      context: ./apigateway
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka
+  demo:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    image: java-microservice-demo
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    build:
+      context: ./demo
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - eureka-network
+    depends_on:
+      - eureka
+
+networks:
+  eureka-network:
+    driver: bridge

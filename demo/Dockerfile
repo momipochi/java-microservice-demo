@@ -13,7 +13,7 @@ FROM eclipse-temurin:21-jre-alpine
 COPY --from=build /home/app/target/*.jar demo.jar
 
 # Expose the port your application runs on
-EXPOSE 8761
+EXPOSE 8081
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "demo.jar"]
