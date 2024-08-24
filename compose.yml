@@ -1,6 +1,6 @@
 services:
   eureka:
-    image: java-microservice-eurekaserver
+    image: momipochi/java-microservice-eurekaserver
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
@@ -16,7 +16,7 @@ services:
   apigateway:
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    image: java-microservice-apigateway
+    image: momipochi/java-microservice-apigateway
     build:
       context: ./apigateway
       dockerfile: Dockerfile
@@ -37,7 +37,7 @@ services:
   demo:
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    image: java-microservice-demo
+    image: momipochi/java-microservice-demo
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     build:
