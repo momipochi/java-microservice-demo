@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka
+  labels:
+    app: eureka
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: eureka
+      labels:
+        app: eureka
+    spec:
+      containers:
+        - name: eureka
+          image: momipochi/java-microservice-eurekaserver
+          ports:
+            - containerPort: 8761
+  selector:
+    matchLabels:
+      app: eureka
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: demo
+      labels:
+        app: demo
+    spec:
+      containers:
+      - name: demo
+        image: momipochi/java-microservice-demo
+  selector:
+    matchLabels:
+      app: demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: apigateway
+      labels:
+        app: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: momipochi/java-microservice-apigateway
+  selector:
+    matchLabels:
+      app: apigateway
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka
+spec:
+  selector:
+    app: eureka
+  ports:
+  - protocol: TCP
+    port: 8761
+    targetPort: 8761
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eureka-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: anderalex.test
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: eureka
+            port:
+              number: 8761
