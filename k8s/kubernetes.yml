@@ -79,7 +79,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: anderalex.test
+  - host: momipochi.test
     http:
       paths:
       - path: /
