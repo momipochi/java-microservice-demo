@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		Thread.sleep(5000);
-
+		Thread.sleep(10000);
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
