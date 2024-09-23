@@ -1,6 +1,11 @@
 spring:
   application:
     name: DemoMicroservice  # This should match the URI used in the gateway
+  profiles:
+    active: usage_message
+logging:
+  level:
+    org: ERROR
 server:
   port : 8081
 eureka:
@@ -10,3 +15,6 @@ eureka:
         fetch-registry: true
         register-with-eureka: true
         enabled: false
+tutorial:
+  client:
+    duration: 10000
